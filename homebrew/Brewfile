@@ -1,0 +1,72 @@
+################################################################################
+# Prerequisites
+################################################################################
+
+tap "homebrew/bundle"
+
+################################################################################
+# Applications
+################################################################################
+
+# Java
+tap "homebrew/cask-versions"
+cask "temurin17"
+cask "temurin11"
+cask "temurin8"
+
+# Basics
+#cask "google-chrome"                            # Cross-platform web browser
+#cask "iterm2"                                   # Terminal emulator as alternative to Apple's Terminal app
+#cask "slack"                                    # Instant messaging platform
+
+################################################################################
+# Utilities
+################################################################################
+
+cask "beyond-compare"                           # Compare files and folders
+brew "gnupg"                                    # GNU Pretty Good Privacy (PGP) package
+brew "jq"                                       # Lightweight and flexible command-line JSON processor
+brew "ncdu"                                     # NCurses Disk Usage
+brew "openssh"                                  # OpenBSD freely-licensed SSH connectivity tools
+brew "parallel"                                 # Shell command parallelization utility
+brew "stow"                                     # A symlink farm manager, used for git versioned dotfiles
+brew "tree"                                     # Display directories as trees (with optional color/HTML output)
+brew "wget"                                     # Internet file retriever
+brew "tmux"                                     # Terminal multiplexer
+brew "zsh"                                      # UNIX shell (command interpreter)
+
+################################################################################
+# Development
+################################################################################
+
+# IDE
+#cask "intellij-idea-ce"
+
+# Version control
+brew "git"                                      # Distributed revision control system
+brew "gh"                                       # GitHub command-line tool
+brew "tig"                                      # Text interface for Git repositories
+
+# Scala
+brew "sbt"                                      # Build tool for Scala projects
+brew "scala"                                    # JVM-based programming language
+brew "scala@2.13"
+
+# Javascript
+brew "node"                                     # Platform built on V8 to build network applications
+brew "nvm"
+
+# AWS
+brew "awscli"                                   # Official Amazon AWS command-line interface
+brew "awslogs"                                  # Simple command-line tool to read AWS CloudWatch logs
+brew "terraform", link: false                   # Tool to build, change, and version infrastructure
+brew "terragrunt"                               # Thin wrapper for Terraform e.g. for locking state
+brew "tfenv", link: true                        # Terraform version manager inspired by rbenv
+
+# SQL
+cask "dbeaver-community"                        # SQL client software application and a database administration tool
+
+# Linters
+brew "shellcheck"                               # Static analysis and lint tool, for (ba)sh scripts
+brew "yamllint"                                 # Linter for YAML files
+
