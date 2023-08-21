@@ -15,9 +15,9 @@ cask "temurin11"
 cask "temurin8"
 
 # Basics
-#cask "google-chrome"                            # Cross-platform web browser
-#cask "iterm2"                                   # Terminal emulator as alternative to Apple's Terminal app
-#cask "slack"                                    # Instant messaging platform
+cask "google-chrome"                            # Cross-platform web browser
+cask "iterm2"                                   # Terminal emulator as alternative to Apple's Terminal app
+cask "slack"                                    # Instant messaging platform
 
 ################################################################################
 # Utilities
@@ -40,7 +40,7 @@ brew "zsh"                                      # UNIX shell (command interprete
 ################################################################################
 
 # IDE
-#cask "intellij-idea-ce"
+cask "intellij-idea-ce"
 
 # Version control
 brew "git"                                      # Distributed revision control system
@@ -49,8 +49,7 @@ brew "tig"                                      # Text interface for Git reposit
 
 # Scala
 brew "sbt"                                      # Build tool for Scala projects
-brew "scala"                                    # JVM-based programming language
-brew "scala@2.13"
+brew "Virtuslab/scala-cli/scala-cli"            # A command-line tool to interact with the Scala language
 
 # Javascript
 brew "node"                                     # Platform built on V8 to build network applications

@@ -1,10 +1,13 @@
 
+# IntelliJ shortcut to use `idea` command to open files
+export PATH=$PATH":/Applications/IntelliJ IDEA CE.app/Contents/MacOS"
+
 # ======================================
 # ZSH settings 
 # ======================================
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/annab/.oh-my-zsh"
+export ZSH="/Users/$(whoami)/.oh-my-zsh"
 ZSH_THEME="muse"
 
 # Uncomment the following line to automatically update without prompting.
@@ -27,6 +30,13 @@ source $ZSH/oh-my-zsh.sh
 alias java20="export JAVA_HOME=/Library/Java/JavaVirtualMachines/temurin-20.jdk/Contents/Home"
 alias java17="export JAVA_HOME=/Library/Java/JavaVirtualMachines/temurin-17.jdk/Contents/Home"
 alias java11="export JAVA_HOME=/Library/Java/JavaVirtualMachines/temurin-11.jdk/Contents/Home"
+
+# ======================================
+# SCALA VERSIONS
+# ======================================
+
+alias scala2="scala-cli -S 2.13"
+alias scala3="scala-cli -S 3.3"
 
 # ======================================
 # HOMEBREW
@@ -53,23 +63,15 @@ alias ls='ls -lah'
 alias env='env | sort'
 alias sed='gsed'                                                            # Use gsed instead of sed
 
-alias reload-zsh-config="exec zsh"
-
+alias zshrc="source .zshrc"
 
 # ======================================
 # GIT
 # ======================================
 
-# Git Aliases
 alias git-clean='git clean -X -f -d'
 alias gst='git status'
 alias glp='git log --graph --pretty='\''%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
-
-
-# ======================================
-# SCALA
-# ======================================
-
 
 # ======================================
 # SBT
