@@ -18,6 +18,7 @@ cask "temurin8"
 cask "google-chrome"                            # Cross-platform web browser
 cask "iterm2"                                   # Terminal emulator as alternative to Apple's Terminal app
 cask "slack"                                    # Instant messaging platform
+cask "postman"                                  # API platform for building and using APIs
 
 ################################################################################
 # Utilities

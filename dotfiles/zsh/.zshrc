@@ -82,4 +82,3 @@ export SBT_OPTS='-Xmx2G'
 alias sbt-no-ass-tests='sbt "set test in assembly := {}"'
 alias sbt-test='sbt test it:test'
 alias sbt-profile='sbt -Dsbt.task.timings=true'
-
