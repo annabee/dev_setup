@@ -32,11 +32,12 @@ alias java17="export JAVA_HOME=/Library/Java/JavaVirtualMachines/temurin-17.jdk/
 alias java11="export JAVA_HOME=/Library/Java/JavaVirtualMachines/temurin-11.jdk/Contents/Home"
 
 # ======================================
-# SCALA VERSIONS
+# SCALA
 # ======================================
 
 alias scala2="scala-cli -S 2.13"
 alias scala3="scala-cli -S 3.3"
+alias sfmt="sbt scalafmtAll"
 
 # ======================================
 # HOMEBREW
@@ -63,7 +64,10 @@ alias ls='ls -lah'
 alias env='env | sort'
 alias sed='gsed'                                                            # Use gsed instead of sed
 
-alias zshrc="source .zshrc"
+alias zshrc="source ~/.zshrc"
+
+alias pip='pip3'
+alias python='python3'
 
 # ======================================
 # GIT
