@@ -9,10 +9,11 @@ tap "homebrew/bundle"
 ################################################################################
 
 # Java
-tap "homebrew/cask-versions"
-cask "temurin17"
-cask "temurin11"
-cask "temurin8"
+cask temurin
+cask "temurin@21"
+cask "temurin@17"
+cask "temurin@11"
+cask "temurin@8"
 
 # Basics
 cask "google-chrome"                            # Cross-platform web browser
@@ -24,17 +25,30 @@ cask "postman"                                  # API platform for building and 
 # Utilities
 ################################################################################
 
+brew "bat"                                      # Newer `cat` utility
 cask "beyond-compare"                           # Compare files and folders
+brew "difftastic"                               # Git diff that understands syntax
+brew "dust"                                     # More intuitive version of du in rust
+brew "eza"                                      # Newer `ls` utility
+brew "fd"                                       # Newer `find` utility
 brew "gnupg"                                    # GNU Pretty Good Privacy (PGP) package
+brew "gping"                                    # Ping, but with a graph
+brew "jandedobbeleer/oh-my-posh/oh-my-posh"     #
 brew "jq"                                       # Lightweight and flexible command-line JSON processor
 brew "ncdu"                                     # NCurses Disk Usage
 brew "openssh"                                  # OpenBSD freely-licensed SSH connectivity tools
 brew "parallel"                                 # Shell command parallelization utility
+brew "procs"                                    # Modern replacement for ps written by Rust
 brew "stow"                                     # A symlink farm manager, used for git versioned dotfiles
+brew "the_silver_searcher"                      # Code-search similar to ack
+brew "tldr"                                     # Simplified and community-driven man pages
 brew "tree"                                     # Display directories as trees (with optional color/HTML output)
 brew "wget"                                     # Internet file retriever
 brew "tmux"                                     # Terminal multiplexer
 brew "zsh"                                      # UNIX shell (command interpreter)
+
+# TODO
+# uv, pip3, poetry, venv, ruff, pyspark etc
 
 ################################################################################
 # Development
@@ -42,6 +56,7 @@ brew "zsh"                                      # UNIX shell (command interprete
 
 # IDE
 cask "intellij-idea-ce"
+cask "pycharm-ce"
 
 # Version control
 brew "git"                                      # Distributed revision control system
@@ -55,13 +70,11 @@ brew "Virtuslab/scala-cli/scala-cli"            # A command-line tool to interac
 # Python
 brew "python"
 
-# Javascript
-brew "node"                                     # Platform built on V8 to build network applications
-brew "nvm"
-
 # AWS
 brew "awscli"                                   # Official Amazon AWS command-line interface
 brew "awslogs"                                  # Simple command-line tool to read AWS CloudWatch logs
+
+# Terraform
 brew "terraform", link: false                   # Tool to build, change, and version infrastructure
 brew "terragrunt"                               # Thin wrapper for Terraform e.g. for locking state
 brew "tfenv", link: true                        # Terraform version manager inspired by rbenv

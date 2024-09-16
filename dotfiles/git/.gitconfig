@@ -16,6 +16,9 @@
 [fetch]
 	prune = true
 
+[diff]
+	external = difft
+
 [alias]
         ca = commit --amend
         cb = checkout -b

@@ -1,6 +1,6 @@
 
-# IntelliJ shortcut to use `idea` command to open files
-export PATH=$PATH":/Applications/IntelliJ IDEA CE.app/Contents/MacOS"
+# Pycharm shortcut to use `pycharm` command to open files
+export PATH=$PATH":/Applications/PyCharm CE.app/Contents/MacOS"
 
 # ======================================
 # ZSH settings 
@@ -18,7 +18,7 @@ export UPDATE_ZSH_DAYS=13
 
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
-plugins=(git)
+plugins=(git command-not-found history)
 
 FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 source $ZSH/oh-my-zsh.sh
@@ -27,17 +27,10 @@ source $ZSH/oh-my-zsh.sh
 # JAVA PATHS
 # ======================================
 
-alias java20="export JAVA_HOME=/Library/Java/JavaVirtualMachines/temurin-20.jdk/Contents/Home"
+alias java21="export JAVA_HOME=/Library/Java/JavaVirtualMachines/temurin-21.jdk/Contents/Home"
 alias java17="export JAVA_HOME=/Library/Java/JavaVirtualMachines/temurin-17.jdk/Contents/Home"
 alias java11="export JAVA_HOME=/Library/Java/JavaVirtualMachines/temurin-11.jdk/Contents/Home"
-
-# ======================================
-# SCALA
-# ======================================
-
-alias scala2="scala-cli -S 2.13"
-alias scala3="scala-cli -S 3.3"
-alias sfmt="sbt scalafmtAll"
+alias java8="export JAVA_HOME=/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home"
 
 # ======================================
 # HOMEBREW
@@ -60,14 +53,32 @@ fi
 # Better command defaults
 alias ...='cd ../..'
 alias ....='cd ../../..'
-alias ls='ls -lah'
+
 alias env='env | sort'
-alias sed='gsed'                                                            # Use gsed instead of sed
+
+alias pip="pip3"
+alias python="python3"
 
 alias zshrc="source ~/.zshrc"
 
-alias pip='pip3'
-alias python='python3'
+# ======================================
+# Newer utilities and backup old aliases
+# ======================================
+alias du=dust
+alias old_du="/usr/bin/du"
+alias find="fd -c always"
+alias old_find="/usr/bin/find"
+alias grep="rg -p"
+alias old_grep="/usr/bin/grep"
+alias cat="bat -f"
+alias ps="procs -c always --tree"
+alias ping=gping
+alias sed="gsed"
+alias old_sed="/usr/bin/sed"
+alias old_man="/usr/bin/man"
+alias man=tldr
+alias ls="eza -all"
+alias old_ls="/usr/bin/ls"
 
 # ======================================
 # GIT
@@ -78,11 +89,10 @@ alias gst='git status'
 alias glp='git log --graph --pretty='\''%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
 
 # ======================================
-# SBT
+# oh-my-posh theme
 # ======================================
 
-export SBT_OPTS='-Xmx2G'
-
-alias sbt-no-ass-tests='sbt "set test in assembly := {}"'
-alias sbt-test='sbt test it:test'
-alias sbt-profile='sbt -Dsbt.task.timings=true'
+if command -v oh-my-posh &> /dev/null
+then
+    eval "$(oh-my-posh init zsh --config ~/bin/oh-my-posh/themes/tiwahu.omp.json)"
+fi
