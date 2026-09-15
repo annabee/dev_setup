@@ -1,25 +1,16 @@
 ################################################################################
-# Prerequisites
+# Terminal
 ################################################################################
 
-tap "homebrew/bundle"
+cask "ghostty"                                  # GPU-accelerated terminal emulator with native UI
+cask "font-jetbrains-mono-nerd-font"            # Patched font supplying the prompt glyphs
+brew "tmux"                                     # Terminal multiplexer, for detachable and remote sessions
 
-################################################################################
-# Applications
-################################################################################
-
-# Java
-cask temurin
-cask "temurin@21"
-cask "temurin@17"
-cask "temurin@11"
-cask "temurin@8"
-
-# Basics
-cask "google-chrome"                            # Cross-platform web browser
-cask "iterm2"                                   # Terminal emulator as alternative to Apple's Terminal app
-cask "slack"                                    # Instant messaging platform
-cask "postman"                                  # API platform for building and using APIs
+# Shell
+brew "oh-my-posh"                               # Prompt theme engine for any shell
+brew "zsh-autosuggestions"                      # Suggests commands inline from history as you type
+brew "zsh-fast-syntax-highlighting"             # Colours commands by validity as you type
+brew "zsh-completions"                          # Additional completion definitions
 
 ################################################################################
 # Utilities
@@ -31,58 +22,77 @@ brew "difftastic"                               # Git diff that understands synt
 brew "dust"                                     # More intuitive version of du in rust
 brew "eza"                                      # Newer `ls` utility
 brew "fd"                                       # Newer `find` utility
+brew "fzf"                                      # Fuzzy finder; pairs with fd and ripgrep
+brew "gnu-sed"                                  # GNU sed as `gsed`; required by the `sed` alias in .zshrc
 brew "gnupg"                                    # GNU Pretty Good Privacy (PGP) package
 brew "gping"                                    # Ping, but with a graph
-brew "jandedobbeleer/oh-my-posh/oh-my-posh"     #
 brew "jq"                                       # Lightweight and flexible command-line JSON processor
 brew "ncdu"                                     # NCurses Disk Usage
-brew "openssh"                                  # OpenBSD freely-licensed SSH connectivity tools
 brew "parallel"                                 # Shell command parallelization utility
 brew "procs"                                    # Modern replacement for ps written by Rust
+brew "ripgrep"                                  # Newer `grep` utility; required by the `grep` alias and .ripgreprc
 brew "stow"                                     # A symlink farm manager, used for git versioned dotfiles
-brew "the_silver_searcher"                      # Code-search similar to ack
-brew "tldr"                                     # Simplified and community-driven man pages
+brew "tealdeer"                                 # Simplified community-driven man pages; provides `tldr`
 brew "tree"                                     # Display directories as trees (with optional color/HTML output)
 brew "wget"                                     # Internet file retriever
-brew "tmux"                                     # Terminal multiplexer
-brew "zsh"                                      # UNIX shell (command interpreter)
+brew "yq"                                       # Like jq, but for YAML
+brew "zoxide"                                   # Smarter `cd` that learns your most-used directories
 
-# TODO
-# uv, pip3, poetry, venv, ruff, pyspark etc
+################################################################################
+# Languages
+################################################################################
+
+# Java
+cask "temurin@25"                               # Current LTS JDK
+
+# Scala
+brew "sbt"                                      # Build tool for Scala projects
+brew "scala-cli"                                # A command-line tool to interact with the Scala language
+
+# Python
+brew "uv"                                       # Fast installer and resolver; replaces pip/venv/poetry/pyenv
+
+# Go
+brew "go"                                       # Go compiler and toolchain
+
+# Node
+brew "node"                                     # JavaScript runtime, ships with npm
 
 ################################################################################
 # Development
 ################################################################################
 
 # IDE
-cask "intellij-idea-ce"
-cask "pycharm-ce"
+cask "jetbrains-toolbox", args: { adopt: true } # Installs and updates the JetBrains IDEs
 
 # Version control
 brew "git"                                      # Distributed revision control system
+brew "git-delta"                                # Syntax-highlighting pager for git diffs
 brew "gh"                                       # GitHub command-line tool
 brew "tig"                                      # Text interface for Git repositories
 
-# Scala
-brew "sbt"                                      # Build tool for Scala projects
-brew "Virtuslab/scala-cli/scala-cli"            # A command-line tool to interact with the Scala language
-
-# Python
-brew "python"
-
 # AWS
 brew "awscli"                                   # Official Amazon AWS command-line interface
-brew "awslogs"                                  # Simple command-line tool to read AWS CloudWatch logs
 
 # Terraform
-brew "terraform", link: false                   # Tool to build, change, and version infrastructure
 brew "terragrunt"                               # Thin wrapper for Terraform e.g. for locking state
 brew "tfenv", link: true                        # Terraform version manager inspired by rbenv
 
-# SQL
-cask "dbeaver-community"                        # SQL client software application and a database administration tool
+# Containers
+# brew "colima"                                 # Container runtime; needs docker or podman as a client
+
+# Kubernetes
+brew "kubernetes-cli"                           # kubectl, the Kubernetes CLI
+brew "k9s"                                      # Terminal UI for managing clusters
+brew "kubectx"                                  # Fast context and namespace switching
+brew "stern"                                    # Multi-pod log tailing
+brew "helm"                                     # Kubernetes package manager
+brew "kustomize"                                # Template-free configuration customization
+brew "kubeconform"                              # Fast manifest schema validation
+brew "kind"                                     # Local clusters running in Docker
 
 # Linters
+brew "pre-commit"                               # Framework for managing pre-commit hooks
 brew "shellcheck"                               # Static analysis and lint tool, for (ba)sh scripts
+brew "trivy"                                    # Security scanner for IaC, containers and dependencies
 brew "yamllint"                                 # Linter for YAML files
-

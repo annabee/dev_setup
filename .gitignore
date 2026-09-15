@@ -1,2 +1,5 @@
 /homebrew/Brewfile.lock.json
 /homebrew/Brewfile.*.lock.json
+
+# Machine-local Claude Code settings
+/.claude/settings.local.json

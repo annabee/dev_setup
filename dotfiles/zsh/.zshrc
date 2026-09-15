@@ -1,50 +1,56 @@
-
-# Pycharm shortcut to use `pycharm` command to open files
-export PATH=$PATH":/Applications/PyCharm CE.app/Contents/MacOS"
-
-# ======================================
-# ZSH settings 
-# ======================================
-
-# Path to your oh-my-zsh installation.
-export ZSH="/Users/$(whoami)/.oh-my-zsh"
-ZSH_THEME="muse"
-
-# Uncomment the following line to automatically update without prompting.
-DISABLE_UPDATE_PROMPT="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-export UPDATE_ZSH_DAYS=13
-
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-plugins=(git command-not-found history)
-
-FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-source $ZSH/oh-my-zsh.sh
-
-# ======================================
-# JAVA PATHS
-# ======================================
-
-alias java21="export JAVA_HOME=/Library/Java/JavaVirtualMachines/temurin-21.jdk/Contents/Home"
-alias java17="export JAVA_HOME=/Library/Java/JavaVirtualMachines/temurin-17.jdk/Contents/Home"
-alias java11="export JAVA_HOME=/Library/Java/JavaVirtualMachines/temurin-11.jdk/Contents/Home"
-alias java8="export JAVA_HOME=/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home"
-
 # ======================================
 # HOMEBREW
 # ======================================
 
-# Enable autocomplete. Source: `https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh`
-if type brew &>/dev/null
-then
-  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-
-  autoload -Uz compinit
-  compinit
+# `brew shellenv` is run from .zprofile, so brew is already on PATH here.
+# Resolve the prefix once; each `brew --prefix` call spawns a subprocess.
+if type brew &>/dev/null; then
+    BREW_PREFIX="$(brew --prefix)"
 fi
 
+# ======================================
+# HISTORY
+# ======================================
+
+HISTFILE=~/.zsh_history
+HISTSIZE=50000
+SAVEHIST=50000
+
+setopt EXTENDED_HISTORY          # Record the timestamp of each command
+setopt INC_APPEND_HISTORY        # Write to the history file immediately, not on exit
+setopt SHARE_HISTORY             # Share history between concurrent shells
+setopt HIST_IGNORE_ALL_DUPS      # Keep only the most recent copy of a duplicated command
+setopt HIST_IGNORE_SPACE         # Do not record commands that start with a space
+setopt HIST_REDUCE_BLANKS        # Strip superfluous whitespace before recording
+setopt HIST_VERIFY               # Expand a history reference rather than running it directly
+
+# ======================================
+# COMPLETIONS
+# ======================================
+
+if [[ -n "$BREW_PREFIX" ]]; then
+    FPATH="$BREW_PREFIX/share/zsh-completions:$BREW_PREFIX/share/zsh/site-functions:$FPATH"
+fi
+
+# Completions dropped here by tools that install their own, such as openspec.
+[[ -d ~/.zsh/completions ]] && FPATH="$HOME/.zsh/completions:$FPATH"
+
+autoload -Uz compinit
+compinit
+
+# Suggest an install when a command is not found
+if [[ -r "$BREW_PREFIX/Library/Taps/homebrew/homebrew-command-not-found/handler.sh" ]]; then
+    source "$BREW_PREFIX/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
+fi
+
+# ======================================
+# JAVA
+# ======================================
+
+# Only the current LTS is installed; see the Brewfile.
+if /usr/libexec/java_home -v 25 &>/dev/null; then
+    export JAVA_HOME="$(/usr/libexec/java_home -v 25)"
+fi
 
 # ======================================
 # ALIASES
@@ -56,14 +62,9 @@ alias ....='cd ../../..'
 
 alias env='env | sort'
 
-alias pip="pip3"
-alias python="python3"
-
 alias zshrc="source ~/.zshrc"
 
-# ======================================
-# Newer utilities and backup old aliases
-# ======================================
+# Newer utilities, keeping the originals reachable
 alias du=dust
 alias old_du="/usr/bin/du"
 alias find="fd -c always"
@@ -71,14 +72,17 @@ alias old_find="/usr/bin/find"
 alias grep="rg -p"
 alias old_grep="/usr/bin/grep"
 alias cat="bat -f"
+alias old_cat="/bin/cat"
 alias ps="procs -c always --tree"
+alias old_ps="/bin/ps"
 alias ping=gping
+alias old_ping="/sbin/ping"
 alias sed="gsed"
 alias old_sed="/usr/bin/sed"
-alias old_man="/usr/bin/man"
 alias man=tldr
-alias ls="eza -all"
-alias old_ls="/usr/bin/ls"
+alias old_man="/usr/bin/man"
+alias ls="eza --all"
+alias old_ls="/bin/ls"
 
 # ======================================
 # GIT
@@ -86,13 +90,57 @@ alias old_ls="/usr/bin/ls"
 
 alias git-clean='git clean -X -f -d'
 alias gst='git status'
-alias glp='git log --graph --pretty='\''%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+alias glp='git log --graph --pretty='\''%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'\'''
 
 # ======================================
-# oh-my-posh theme
+# KUBERNETES
 # ======================================
 
-if command -v oh-my-posh &> /dev/null
-then
-    eval "$(oh-my-posh init zsh --config ~/bin/oh-my-posh/themes/tiwahu.omp.json)"
+alias k='kubectl'
+alias kx='kubectx'
+alias kn='kubens'
+
+# Generating the completion costs ~100ms, so cache it and refresh only when
+# the kubectl binary is newer than the cache.
+if type kubectl &>/dev/null; then
+    kubectl_completion=~/.cache/zsh/kubectl_completion
+    if [[ ! -r "$kubectl_completion" || $(command -v kubectl) -nt "$kubectl_completion" ]]; then
+        mkdir -p "${kubectl_completion:h}"
+        kubectl completion zsh > "$kubectl_completion"
+    fi
+    source "$kubectl_completion"
+    compdef __start_kubectl k
+    unset kubectl_completion
 fi
+
+# ======================================
+# TOOL INITIALISATION
+# ======================================
+
+# Fuzzy finder; provides Ctrl-R history search and Ctrl-T file search
+if type fzf &>/dev/null; then
+    source <(fzf --zsh)
+fi
+
+# Smarter `cd`, invoked as `z`
+if type zoxide &>/dev/null; then
+    eval "$(zoxide init zsh)"
+fi
+
+# Prompt. The theme is stowed from dotfiles/oh-my-posh.
+if type oh-my-posh &>/dev/null && [[ -r ~/.config/oh-my-posh/theme.omp.json ]]; then
+    eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/theme.omp.json)"
+fi
+
+# ======================================
+# PLUGINS
+# ======================================
+
+# Syntax highlighting must be sourced last so it wraps the final widget set.
+autosuggestions="$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+highlighting="$BREW_PREFIX/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
+
+[[ -r "$autosuggestions" ]] && source "$autosuggestions"
+[[ -r "$highlighting" ]] && source "$highlighting"
+
+unset autosuggestions highlighting
