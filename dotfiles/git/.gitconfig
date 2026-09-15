@@ -1,44 +1,92 @@
 [user]
-    name = Anna Bladzich
+    name = Anna Keyzers
     email = 10401693+annabee@users.noreply.github.com
+    # Refuse to guess an identity from the hostname rather than inventing one
     useConfigOnly = true
 
 [core]
     excludesfile = ~/.gitignore_global
+    pager = delta
+
+[init]
+    defaultBranch = main
 
 [push]
-    default = simple
     autoSetupRemote = true
 
 [pull]
-	rebase = true
+    rebase = true
 
 [fetch]
-	prune = true
+    prune = true
+    pruneTags = true
+
+[rebase]
+    autosquash = true
+    autostash = true
+
+[rerere]
+    enabled = true
+    autoupdate = true
+
+[merge]
+    conflictstyle = zdiff3
+
+[commit]
+    verbose = true
 
 [diff]
-	external = difft
+    algorithm = histogram
+    colorMoved = zebra
+    mnemonicPrefix = true
+    renames = true
+    tool = difftastic
+
+[branch]
+    sort = -committerdate
+
+[column]
+    ui = auto
+
+[help]
+    autocorrect = prompt
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true
+    line-numbers = true
+    hyperlinks = true
+
+[difftool "difftastic"]
+    cmd = difft "$LOCAL" "$REMOTE"
+
+[difftool]
+    prompt = false
 
 [alias]
-        ca = commit --amend
-        cb = checkout -b
-        c = commit
-        co = checkout
-        br = branch
-        sres1 = reset --soft HEAD~1
-        hres1 = reset --hard HEAD~1
-        hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-        logs = log --stat -p
-        logg = log --oneline --decorate --graph --all
-        pretty-log = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %aN%C(reset)%C(bold yellow)%d%C(reset)'
-        pretty-log-with-dates = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%aI)%C(reset) %C(white)%s%C(reset) %C(dim white)- %aN%C(reset)%C(bold yellow)%d%C(reset)'
-        log-recent = pretty-log --since='3 days ago'
-        logv = pretty-log --all
-        logvv = pretty-log-with-dates --all
-        diff-base = !git diff --ignore-all-space $(git merge-base --fork-point main)
-        difftool-base = !git difftool --trust-exit-code -y $(git merge-base --fork-point main)
-        push-branch = !git push --set-upstream origin $(git symbolic-ref --short HEAD)
-        branch-statuses = branch -vv
-        unmerged-branches = !git --no-pager branch --no-merged main
-        unmerged-branches-all = !git --no-pager branch --all --no-merged main
-        find-deleted-file = log --full-history -1 --
+    ca = commit --amend
+    cb = checkout -b
+    c = commit
+    co = checkout
+    br = branch
+    sres1 = reset --soft HEAD~1
+    hres1 = reset --hard HEAD~1
+    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+    logs = log --stat -p
+    logg = log --oneline --decorate --graph --all
+    pretty-log = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %aN%C(reset)%C(bold yellow)%d%C(reset)'
+    pretty-log-with-dates = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%aI)%C(reset) %C(white)%s%C(reset) %C(dim white)- %aN%C(reset)%C(bold yellow)%d%C(reset)'
+    log-recent = pretty-log --since='3 days ago'
+    logv = pretty-log --all
+    logvv = pretty-log-with-dates --all
+    dft = -c diff.external=difft diff
+    dft-base = -c diff.external=difft diff --ignore-all-space main...HEAD
+    diff-base = diff --ignore-all-space main...HEAD
+    difftool-base = difftool --trust-exit-code -y main...HEAD
+    push-branch = !git push --set-upstream origin $(git symbolic-ref --short HEAD)
+    branch-statuses = branch -vv
+    unmerged-branches = !git --no-pager branch --no-merged main
+    unmerged-branches-all = !git --no-pager branch --all --no-merged main
+    find-deleted-file = log --full-history -1 --

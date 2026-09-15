@@ -1,0 +1,46 @@
+# Ghostty configuration.
+# Full reference: `ghostty +show-config --default --docs`, themes: `ghostty +list-themes`.
+
+# ======================================
+# FONT
+# ======================================
+
+# The Nerd Font variant is required: the oh-my-posh prompt draws powerline and
+# icon glyphs that render as tofu in the unpatched JetBrains Mono.
+font-family = JetBrainsMono Nerd Font Mono
+font-size = 13
+
+# ======================================
+# APPEARANCE
+# ======================================
+
+theme = Catppuccin Mocha
+
+window-padding-x = 8
+window-padding-y = 8
+window-save-state = always
+
+macos-titlebar-style = tabs
+
+# ======================================
+# SHELL
+# ======================================
+
+# Injects cwd reporting and prompt marking into zsh, which is what lets new
+# splits and tabs open in the current directory.
+shell-integration = zsh
+
+scrollback-limit = 10000
+
+# Treat option as alt so word-wise movement bindings work in the shell.
+macos-option-as-alt = true
+
+# ======================================
+# KEYBINDS
+# ======================================
+
+# Splits, since tmux is reserved for detachable and remote sessions.
+keybind = cmd+d=new_split:right
+keybind = cmd+shift+d=new_split:down
+keybind = cmd+[=goto_split:previous
+keybind = cmd+]=goto_split:next
