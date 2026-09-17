@@ -32,7 +32,7 @@ if [[ -n "$BREW_PREFIX" ]]; then
     FPATH="$BREW_PREFIX/share/zsh-completions:$BREW_PREFIX/share/zsh/site-functions:$FPATH"
 fi
 
-# Completions dropped here by tools that install their own, such as openspec.
+# Completions dropped here by tools that install their own.
 [[ -d ~/.zsh/completions ]] && FPATH="$HOME/.zsh/completions:$FPATH"
 
 autoload -Uz compinit
