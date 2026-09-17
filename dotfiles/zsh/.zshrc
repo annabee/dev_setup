@@ -93,6 +93,16 @@ alias gst='git status'
 alias glp='git log --graph --pretty='\''%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'\'''
 
 # ======================================
+# CODING AGENTS
+# ======================================
+
+if type gh &>/dev/null; then
+    github_token="$(gh auth token 2>/dev/null)"
+    [[ -n "$github_token" ]] && export GITHUB_TOKEN="$github_token"
+    unset github_token
+fi
+
+# ======================================
 # KUBERNETES
 # ======================================
 

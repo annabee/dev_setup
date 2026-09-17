@@ -65,6 +65,10 @@ brew "node"                                     # JavaScript runtime, ships with
 # IDE
 cask "jetbrains-toolbox", args: { adopt: true } # Installs and updates the JetBrains IDEs
 
+# Coding agents
+cask "claude-code"                              # Anthropic's agent CLI, invoked as `claude`
+cask "codex"                                    # OpenAI's agent CLI, invoked as `codex`
+
 # Version control
 brew "git"                                      # Distributed revision control system
 brew "git-delta"                                # Syntax-highlighting pager for git diffs
