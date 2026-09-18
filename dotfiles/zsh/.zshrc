@@ -35,6 +35,8 @@ fi
 # Completions dropped here by tools that install their own.
 [[ -d ~/.zsh/completions ]] && FPATH="$HOME/.zsh/completions:$FPATH"
 
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+
 autoload -Uz compinit
 compinit
 
