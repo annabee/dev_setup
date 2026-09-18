@@ -3,3 +3,8 @@
 
 # Machine-local Claude Code settings
 /.claude/settings.local.json
+
+# Secret-env files. These live in ~/.dotfiles and hold 1Password references;
+# unanchored so they stay ignored if ever stowed from this repo.
+secret.zsh
+*.secret.zsh
