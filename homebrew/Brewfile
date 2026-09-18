@@ -43,20 +43,11 @@ brew "zoxide"                                   # Smarter `cd` that learns your 
 # Languages
 ################################################################################
 
-# Java
 cask "temurin@25"                               # Current LTS JDK
-
-# Scala
 brew "sbt"                                      # Build tool for Scala projects
 brew "scala-cli"                                # A command-line tool to interact with the Scala language
-
-# Python
 brew "uv"                                       # Fast installer and resolver; replaces pip/venv/poetry/pyenv
-
-# Go
 brew "go"                                       # Go compiler and toolchain
-
-# Node
 brew "node"                                     # JavaScript runtime, ships with npm
 
 ################################################################################
@@ -86,6 +77,7 @@ brew "tfenv", link: true                        # Terraform version manager insp
 
 # Containers
 # brew "colima"                                 # Container runtime; needs docker or podman as a client
+# brew "docker"                                 # Docker CLI client for the colima runtime
 
 # Kubernetes
 brew "kubernetes-cli"                           # kubectl, the Kubernetes CLI
