@@ -102,12 +102,12 @@ if type gh &>/dev/null; then
     unset github_token
 fi
 
-secret_env="$HOME/.dotfiles/secret.zsh"
+secret_env="${SECRET_FILE:-$HOME/.dotfiles/secret.zsh}"
 if type op &>/dev/null && [[ -r "$secret_env" ]]; then
-    if injected="$(op inject --in-file "$secret_env" 2>/dev/null)"; then
+    if injected="$(op inject --in-file "$secret_env")"; then
         eval "$injected"
     else
-        print -u2 "secret.zsh: 1Password locked or unreachable; secrets not loaded"
+        print -u2 "${secret_env:t}: op inject failed, no secrets loaded (locked vault, or one dead op:// reference aborts the whole file)"
     fi
     unset injected
 fi
