@@ -16,6 +16,7 @@ brew "zsh-completions"                          # Additional completion definiti
 # Utilities
 ################################################################################
 
+cask "1password-cli"                            # 1Password CLI, invoked as `op`
 brew "bat"                                      # Newer `cat` utility
 cask "beyond-compare"                           # Compare files and folders
 brew "difftastic"                               # Git diff that understands syntax
@@ -64,6 +65,11 @@ brew "node"                                     # JavaScript runtime, ships with
 
 # IDE
 cask "jetbrains-toolbox", args: { adopt: true } # Installs and updates the JetBrains IDEs
+
+# AI-assisted development
+cask "claude-code"                              # Anthropic's agent CLI, invoked as `claude`
+cask "codex"                                    # OpenAI's agent CLI, invoked as `codex`
+brew "openspec"                                 # Spec-driven development workflow for both agent CLIs
 
 # Version control
 brew "git"                                      # Distributed revision control system

@@ -32,7 +32,7 @@ if [[ -n "$BREW_PREFIX" ]]; then
     FPATH="$BREW_PREFIX/share/zsh-completions:$BREW_PREFIX/share/zsh/site-functions:$FPATH"
 fi
 
-# Completions dropped here by tools that install their own, such as openspec.
+# Completions dropped here by tools that install their own.
 [[ -d ~/.zsh/completions ]] && FPATH="$HOME/.zsh/completions:$FPATH"
 
 autoload -Uz compinit
@@ -91,6 +91,16 @@ alias old_ls="/bin/ls"
 alias git-clean='git clean -X -f -d'
 alias gst='git status'
 alias glp='git log --graph --pretty='\''%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'\'''
+
+# ======================================
+# CODING AGENTS
+# ======================================
+
+if type gh &>/dev/null; then
+    github_token="$(gh auth token 2>/dev/null)"
+    [[ -n "$github_token" ]] && export GITHUB_TOKEN="$github_token"
+    unset github_token
+fi
 
 # ======================================
 # KUBERNETES
