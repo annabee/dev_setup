@@ -43,12 +43,12 @@ brew "zoxide"                                   # Smarter `cd` that learns your 
 # Languages
 ################################################################################
 
-cask "temurin@25"                               # Current LTS JDK
-brew "sbt"                                      # Build tool for Scala projects
-brew "scala-cli"                                # A command-line tool to interact with the Scala language
-brew "uv"                                       # Fast installer and resolver; replaces pip/venv/poetry/pyenv
 brew "go"                                       # Go compiler and toolchain
 brew "node"                                     # JavaScript runtime, ships with npm
+brew "sbt"                                      # Build tool for Scala projects
+brew "scala-cli"                                # A command-line tool to interact with the Scala language
+cask "temurin@25"                               # Current LTS JDK
+brew "uv"                                       # Fast installer and resolver; replaces pip/venv/poetry/pyenv
 
 ################################################################################
 # Development
