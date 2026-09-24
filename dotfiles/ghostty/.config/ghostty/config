@@ -30,7 +30,7 @@ macos-titlebar-style = tabs
 # splits and tabs open in the current directory.
 shell-integration = zsh
 
-scrollback-limit = 10000
+scrollback-limit = 1073741824
 
 # Treat option as alt so word-wise movement bindings work in the shell.
 macos-option-as-alt = true

@@ -105,10 +105,10 @@ if type gh &>/dev/null; then
 fi
 
 export SECRET_FILE="${SECRET_FILE:-$HOME/.dotfiles/secret.zsh}"
-if type op &>/dev/null && [[ -r "$SECRET_FILE" ]]; then
-    alias claude='op run --env-file="$SECRET_FILE" -- claude'
-    alias codex='op run --env-file="$SECRET_FILE" -- codex'
-fi
+#if type op &>/dev/null && [[ -r "$SECRET_FILE" ]]; then
+#    alias claude='op run --env-file="$SECRET_FILE" -- claude'
+#    alias codex='op run --env-file="$SECRET_FILE" -- codex'
+#fi
 
 # ======================================
 # KUBERNETES
