@@ -31,7 +31,7 @@ the dotfiles into `$HOME`.
 
    ```sh
    cd dotfiles
-   stow --target="$HOME" */
+   stow --target="$HOME" */ 
    ```
 
 5. Open a new shell so the linked `.zshrc` is picked up.

@@ -104,16 +104,11 @@ if type gh &>/dev/null; then
     unset github_token
 fi
 
-secret_env="$HOME/.dotfiles/secret.zsh"
-if type op &>/dev/null && [[ -r "$secret_env" ]]; then
-    if injected="$(op inject --in-file "$secret_env" 2>/dev/null)"; then
-        eval "$injected"
-    else
-        print -u2 "secret.zsh: 1Password locked or unreachable; secrets not loaded"
-    fi
-    unset injected
-fi
-unset secret_env
+export SECRET_FILE="${SECRET_FILE:-$HOME/.dotfiles/secret.zsh}"
+#if type op &>/dev/null && [[ -r "$SECRET_FILE" ]]; then
+#    alias claude='op run --env-file="$SECRET_FILE" -- claude'
+#    alias codex='op run --env-file="$SECRET_FILE" -- codex'
+#fi
 
 # ======================================
 # KUBERNETES
